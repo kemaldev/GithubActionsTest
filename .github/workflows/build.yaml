@@ -1,11 +1,14 @@
 name: build and push
 on: pull_request
-env:
-  GIT_HASH: $(git rev-parse --short "$GITHUB_SHA")
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+    - name: Declare commit sha id
+      id: vars
+      shell: bash
+      run: |
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
     - name: Checkout
       uses: actions/checkout@v3
     - name: Set up Docker Buildx
@@ -20,4 +23,4 @@ jobs:
       with:
         file: src/Dockerfile
         push: true
-        tags: kemaldev/dotnet-test:GIT_HASH
+        tags: kemaldev/dotnet-test:${{ steps.vars.outputs.sha_short }}

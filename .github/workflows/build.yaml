@@ -20,4 +20,4 @@ jobs:
       with:
         file: src/Dockerfile
         push: true
-        tags: kemaldev/dotnet-test:GIT_HASH
+        tags: kemaldev/dotnet-test:$GIT_HASH

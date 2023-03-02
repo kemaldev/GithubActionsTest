@@ -1,5 +1,7 @@
 name: build and push
 on: pull_request
+permissions:
+  checks: write
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -15,9 +17,7 @@ jobs:
     - name: dotnet build
       run: dotnet build src/TestApp/TestApp.csproj --no-restore
     - name: dotnet test
-      run: dotnet test src/TestApp.UnitTests/TestApp.UnitTests.csproj --logger "trx;logfilename=test-results.trx" --results-directory .
-    - name: ls command
-      run: ls -a
+      run: dotnet test src/TestApp.UnitTests/TestApp.UnitTests.csproj --logger "trx;logfilename=test-results.trx" --results-directory . # --no-restore option causing tests to not run for some reason
     - name: Test Report
       uses: dorny/test-reporter@v1
       if: success() || failure()

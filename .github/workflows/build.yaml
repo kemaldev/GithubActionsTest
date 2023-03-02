@@ -15,7 +15,14 @@ jobs:
     - name: dotnet build
       run: dotnet build src/TestApp/TestApp.csproj --no-restore
     - name: dotnet test
-      run: dotnet test src/TestApp.UnitTests/TestApp.UnitTests.csproj --no-restore
+      run: dotnet test src/TestApp.UnitTests/TestApp.UnitTests.csproj --no-restore --logger "trx;logfilename=test-results.trx"
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+        name: dotnet tests
+        path: test-results.trx
+        reporter: dotnet-trx
     - name: Set outputs
       id: vars
       run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT

@@ -15,7 +15,7 @@ jobs:
     - name: dotnet build
       run: dotnet build src/TestApp/TestApp.csproj --no-restore
     - name: dotnet test
-      run: dotnet test src/TestApp.UnitTests/TestApp.UnitTests.csproj --no-restore --logger "trx;logfilename=test-results.trx" --results-directory .
+      run: dotnet test src/TestApp.UnitTests/TestApp.UnitTests.csproj --logger "trx;logfilename=test-results.trx" --results-directory .
     - name: ls command
       run: ls -a
     - name: Test Report

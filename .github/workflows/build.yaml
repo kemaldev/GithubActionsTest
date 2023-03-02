@@ -37,4 +37,4 @@ jobs:
       with:
         file: src/Dockerfile
         push: true
-        tags: kemaldev/dotnet-test:${{ github.event.number }} # pr number is tag here
+        tags: kemaldev/dotnet-test:pr/${{ github.event.number }} # pr number is tag here

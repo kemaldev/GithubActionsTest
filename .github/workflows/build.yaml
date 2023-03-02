@@ -11,11 +11,11 @@ jobs:
       with:
         dotnet-version: '6.0'
     - name: dotnet restore
-      run: dotnet restore
+      run: dotnet restore src/TestApp/TestApp.csproj
     - name: dotnet build
-      run: dotnet build --no-restore
+      run: dotnet build src/TestApp/TestApp.csproj --no-restore
     - name: dotnet test
-      run: dotnet test --no-restore
+      run: dotnet test src/TestApp.UnitTests/TestApp.UnitTests.csproj --no-restore
     - name: Set outputs
       id: vars
       run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT

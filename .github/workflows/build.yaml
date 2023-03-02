@@ -30,8 +30,8 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
-        username: ${{ AZ_REGISTRY_USER }}
-        password: ${{ AZ_REGISTRY_PASSWORD }}
+        username: ${{ secrets.AZ_REGISTRY_USER }}
+        password: ${{ secrets.AZ_REGISTRY_PASSWORD }}
     - name: Build and push
       uses: docker/build-push-action@v4
       with:

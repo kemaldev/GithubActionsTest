@@ -1,7 +1,7 @@
 name: build and push
 on: pull_request
 permissions:
-  checks: write
+  checks: write # needed for dorny/test-reporter@v1 to work properly.
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -25,9 +25,6 @@ jobs:
         name: dotnet tests
         path: './test-results.trx'
         reporter: dotnet-trx
-    - name: Set outputs
-      id: vars
-      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
     - name: Login to Docker Hub
@@ -40,4 +37,4 @@ jobs:
       with:
         file: src/Dockerfile
         push: true
-        tags: kemaldev/dotnet-test:${{ steps.vars.outputs.sha_short }}
+        tags: kemaldev/dotnet-test:pr-${{ github.event.number }} # pr number is tag here

@@ -6,6 +6,16 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Setup .NET Core SDK 6.0
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0'
+    - name: dotnet restore
+      run: dotnet restore
+    - name: dotnet build
+      run: dotnet build --no-restore
+    - name: dotnet test
+      run: dotnet test --no-restore
     - name: Set outputs
       id: vars
       run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT

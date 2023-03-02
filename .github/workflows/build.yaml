@@ -16,6 +16,8 @@ jobs:
       run: dotnet build src/TestApp/TestApp.csproj --no-restore
     - name: dotnet test
       run: dotnet test src/TestApp.UnitTests/TestApp.UnitTests.csproj --no-restore --logger "trx;logfilename=test-results.trx" --results-directory .
+    - name: ls command
+      run: ls -a
     - name: Test Report
       uses: dorny/test-reporter@v1
       if: success() || failure()

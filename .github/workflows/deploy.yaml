@@ -1,0 +1,21 @@
+name: Deployment
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        description: Environment to deploy to
+      version:
+        type: choice
+        description: Tag of image to deploy
+        options:
+        - pr-7
+        - pr-8
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: greet
+        run: | 
+          echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
